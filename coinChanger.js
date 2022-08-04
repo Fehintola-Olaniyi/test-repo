@@ -1,41 +1,47 @@
 
 console.log("Change Calculator");
 function coinChanger(centVal) {
-    var coinType = ["Quarters", "Dimes", "Nickels", "Pennies"];
-    var coinValues = [25, 10, 5, 1];
+  const coinType = {
+    "Quarters": 25, 
+    "Dimes": 10, 
+    "Nickels": 5, 
+    "Pennies": 1
+};
+
+let quart = coinType.Quarters, dime = coinType.Dimes, nick = coinType.Nickels, pen = coinType.Pennies;
 
   if (centVal >= 0 && centVal <= 99) {
-     var a = Math.floor(centVal / coinValues[0]);
+     var a = Math.floor(centVal / quart);
          console.log("Quarters: " + a);
   }
-  if (centVal % coinValues[0] >= 10) {
-     var b = centVal % coinValues[0];
-     var c = Math.floor(b / coinValues[1]);
+  if (centVal % quart >= 10) {
+     var b = centVal % quart;
+     var c = Math.floor(b / dime);
         console.log("Dimes: " + c);
   }
-   else if (centVal % coinValues[0] >= 5) {
+   else if (centVal % quart >= 5) {
          console.log("Dimes: 0");
-     var g = Math.floor((centVal % coinValues[0]) / coinValues[2]);
+     var g = Math.floor((centVal % quart) / nick);
         console.log(`Nickels: ${g}`);
-        console.log("pennies: " + ((centVal % coinValues[0]) % coinValues[2]));
+        console.log("pennies: " + ((centVal % quart) % nick));
   }
-  if (centVal % coinValues[0] < 5) {
-     var h = centVal % coinValues[0];
+  if (centVal % quart < 5) {
+     var h = centVal % quart;
         console.log("Dimes: 0\nNickels: 0\nPennies: " + h);
   }
-  if (b % coinValues[1] >= 5) {
-     var d = b % coinValues[1];
-     var e = Math.floor(d / coinValues[2]);
+  if (b % dime >= 5) {
+     var d = b % dime;
+     var e = Math.floor(d / nick);
         console.log("Nickels: " + e);
   }
-   else if (b % coinValues[1] < 5) {
-        console.log("Nickels: 0\nPennies: " + (b % coinValues[1]));
+   else if (b % dime < 5) {
+        console.log("Nickels: 0\nPennies: " + (b % dime));
   }
-  if (d % coinValues[2] >= 1) {
-     var f = d % coinValues[2];
+  if (d % nick >= 1) {
+     var f = d % nick;
         console.log("Pennies: " + f);
   }
-   else if (d % coinValues[2] == 0) {
+   else if (d % nick == 0) {
         console.log("Pennies: 0");
   }
 }
