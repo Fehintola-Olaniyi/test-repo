@@ -1,4 +1,3 @@
-// const prompt = require("prompt-sync")();
  export class Member {
   constructor(first, last, gender, dateOfBirth, phoneNumber, emailAddress) {
     this.first = first;
@@ -7,7 +6,6 @@
     this.dateOfBirth = dateOfBirth;
     this.phoneNumber = phoneNumber;
     this.emailAddress = emailAddress;
-    // let basesalary = frig;
   }
 
   set first(val) {
@@ -51,9 +49,22 @@
   }
 
   borrowBook(userBook) {
-    console.log("checking if book is available for borrowing...");
-    console.log(`Congratulations. You have successfully borrowed ${userBook.numOfCopies} copy(ies) of 
+    console.log("Checking if book is available for borrowing...");
+    
+    lendersQueue.enqueue(this);
+    function printt() {
+    let firstGuy = lendersQueue.front();
+    console.log(`Congratulations. ${firstGuy} you have successfully borrowed ${userBook.numOfCopies} copy(ies) of 
     ${userBook.bookName} by ${userBook.author}\nTime of issuance: ${new Date()}.`);
+    }
+    
+    if(lendersQueue.size() > 1) {
+    setTimeout(printt, 5000);
+    }
+    // bookQueue.print();
+    // bookQueue.dequeue();
+    lendersQueue.print();
+    // lendersQueue.dequeue();
   
   }
 
@@ -64,7 +75,7 @@
   }
 }
 
-class Book {
+ export class Book {
   constructor(bookName, author, numOfCopies, isbnNum) {
     this.bookName = bookName;
     this.author = author;
@@ -99,12 +110,56 @@ class Book {
 
 }
 
+export class Queue{
+  collection = [];
+  print() {
+    console.log(this.collection);
+  }
+  enqueue(element) {
+     if (this.isEmpty()) {
+      this.collection.push(element)
+     } else {
+      var added = false;
+      for (let i = 0; i < this.collection.length; i++) {
+        if (element.rank[1] > this.collection[i].rank[1]) {
+          this.collection.splice(i, 0, element);
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+       this.collection.push(element);
+      }
+     }
+  }
+  dequeue() {
+    if(this.isEmpty()) {
+        return 'Undeflow';
+    } else {
+    return this.collection.shift();
+    }
+  }
+  front() {
+    if(this.isEmpty()) {
+      return " No elements in Queue";
+    } else {
+    console.log(this.collection[0]);
+    }
+  }
+  back() {
+    return this.collection[this.collection.length-1];
+  }
+  isEmpty() {
+    return (this.collection.length == 0);
+  }
+  size() {
+    return this.collection.length;
+  }
+}
 
 
 
-
-
-
+let lendersQueue = new Queue();
 
 
 
@@ -174,7 +229,7 @@ class Book {
 //     latestMem.returnBook(newUserbook);
 //   }
 
-// })();
+// })(); // EDIT: You can not execute an IIFE twice
 
 
 

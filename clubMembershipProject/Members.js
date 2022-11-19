@@ -1,29 +1,20 @@
-import { Member } from './Main.js';
+// const prompt = require("prompt-sync")();
+import { Member, Book, Queue } from './Main.js';
 class Student extends Member {
-  // constructor(first, last, gender, dateOfBirth, phoneNumber, emailAddress, studentNo, cla_ss) {
-    // super(first, last, gender, dateOfBirth, phoneNumber, emailAddress);
-    rank = "student";
-    cla_ss = cla_ss;
-    studentNo = studentNo;
+    rank = ["Student", 0];
+    cla_ss;
+    studentNo;
   }
-// }
 
 class Staff extends Member {
-  // constructor(first, last, gender, dateOfBirth, phoneNumber, emailAddress) {
-    // super(first, last, gender, dateOfBirth, phoneNumber, emailAddress);
-    rank = "Staff";
-    staffNo = 0;
+    rank = ["Staff", 1];
+    staffNo;
     netPay = 2000;
  
   assignToStudent(student_number) {
     
   }
 } 
-
-let jane = new Staff("Jane", "Doe", "f", 1999, 39282, "janedoe@gmail.com");
-let james = new Staff("James", "Keys", "m", 2000, 37891, "jameskeys@gmail.com");
-let matthew = new Staff("Matthew", "Jill", "m", 2004, 29373, "mattjill@gmail.com");
-let alicia = new Staff("Alicia", "Morgan", "f", 1982, 90372, "alimorgan@gmail.com");
 
 
 class List {
@@ -32,7 +23,7 @@ class List {
   dataStore = [];
   insert;
 
-  merge(element) {
+  add(element) {
     this.dataStore[this.listSize++] = element;
   }
   finds(element) {
@@ -98,13 +89,34 @@ class List {
   }
 
 }
+
+
 let staffList = new List();
 let studentList = new List();
-staffList.merge(jane);
-staffList.merge(james);
-staffList.merge(matthew);
-staffList.merge(alicia);
-console.log(staffList.showStore());
+
+
+let jane = new Staff("Jane", "Doe", "f", 1999, 39282, "janedoe@gmail.com");
+let james = new Staff("James", "Keys", "m", 2000, 37891, "jameskeys@gmail.com");
+let matthew = new Student("Matthew", "Jill", "m", 2004, 29373, "mattjill@gmail.com");
+let alicia = new Student("Alicia", "Morgan", "f", 1982, 90372, "alimorgan@gmail.com");
+
+
+staffList.add(jane);
+staffList.add(james);
+studentList.add(matthew);
+studentList.add(alicia);
+
+let newBook = new Book("Eat That Frog", "Brian Tracy", 1, 978);
+
+jane.borrowBook(newBook);
+alicia.borrowBook(newBook);
+
+
+
+
+
+// console.log(staffList.showStore());
+// console.log(studentList.showStore());
 // staffList.front();
 // console.log(staffList.getElement());
 // staffList.next();
